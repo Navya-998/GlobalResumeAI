@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="row mb-4">
+
+<div class="col-lg-12">
+
+<h1 class="fw-bold">
+
+👋 Welcome {{ current_user.username }}
+
+</h1>
+
+<p class="text-muted">
+
+Manage all your resumes and AI tools from one place.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-3 mb-4">
+
+<div class="card shadow text-center h-100">
+
+<div class="card-body">
+
+<h1>📄</h1>
+
+<h2>{{ total_resumes }}</h2>
+
+<p>Total Resumes</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-4">
+
+<div class="card shadow text-center h-100">
+
+<div class="card-body">
+
+<h1>🤖</h1>
+
+<h2>AI</h2>
+
+<p>Resume Tools</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-4">
+
+<div class="card shadow text-center h-100">
+
+<div class="card-body">
+
+<h1>📊</h1>
+
+<h2>ATS</h2>
+
+<p>Resume Analysis</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-4">
+
+<div class="card shadow text-center h-100">
+
+<div class="card-body">
+
+<h1>🎯</h1>
+
+<h2>JOB</h2>
+
+<p>Job Match</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="my-5">
+
+<h3 class="mb-4">
+
+⚡ Quick Actions
+
+</h3>
+
+<div class="row">
+
+<div class="col-md-3 mb-3">
+
+<a href="{{ url_for('resume.resume_builder') }}"
+class="btn btn-primary w-100 p-3">
+
+➕ Create Resume
+
+</a>
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<a href="{{ url_for('resume.my_resumes') }}"
+class="btn btn-success w-100 p-3">
+
+📄 My Resumes
+
+</a>
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<a href="{{ url_for('resume.resume_builder') }}"
+class="btn btn-warning w-100 p-3">
+
+🤖 AI Summary
+
+</a>
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<a href="{{ url_for('auth.logout') }}"
+class="btn btn-danger w-100 p-3">
+
+🚪 Logout
+
+</a>
+
+</div>
+
+</div>
+
+<hr class="my-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+Recent Features
+
+</div>
+
+<div class="card-body">
+
+<ul class="list-group">
+
+<li class="list-group-item">✅ AI Resume Summary</li>
+
+<li class="list-group-item">✅ AI Cover Letter</li>
+
+<li class="list-group-item">✅ ATS Score</li>
+
+<li class="list-group-item">✅ Job Match Analyzer</li>
+
+<li class="list-group-item">✅ PDF Download</li>
+
+<li class="list-group-item">✅ DOCX Download</li>
+
+<li class="list-group-item">✅ Custom Resume Sections</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

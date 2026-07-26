@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Career Hub - Coming Soon{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-body text-center p-5">
+
+            <h1 class="display-4 mb-3">
+
+                🎓 Career Hub
+
+            </h1>
+
+            <h3 class="text-primary">
+
+                Coming Soon!
+
+            </h3>
+
+            <p class="lead mt-4">
+
+                We're building one of the largest career resources for job seekers.
+
+            </p>
+
+            <hr>
+
+            <div class="row mt-4">
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <div class="card-body">
+
+                            <h4>📄 Resume Examples</h4>
+
+                            <p>Industry-specific ATS-friendly resume examples.</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <div class="card-body">
+
+                            <h4>💼 Interview Questions</h4>
+
+                            <p>Technical and HR interview preparation.</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <div class="card-body">
+
+                            <h4>📈 Career Guides</h4>
+
+                            <p>Roadmaps, salary guides, ATS tips and more.</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <a href="{{ url_for('main.home') }}"
+               class="btn btn-primary btn-lg mt-4">
+
+                ← Back to Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

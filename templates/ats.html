@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}ATS Report{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="mb-0">Resume ATS Analysis</h2>
+                </div>
+
+                <div class="card-body">
+
+                    <h3>{{ resume.full_name }}</h3>
+                    <p>{{ resume.email }}</p>
+
+                    <hr>
+
+                    <h4>ATS Score</h4>
+
+                    <div class="progress mb-4" style="height:30px;">
+                        <div class="progress-bar bg-success"
+     role="progressbar"
+     aria-valuenow="{{ result.score }}"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     data-score="{{ result.score }}">
+    {{ result.score }}%
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const bar = document.querySelector(".progress-bar");
+    if (bar) {
+        bar.style.width = bar.dataset.score + "%";
+    }
+});
+</script>
+                    </div>
+
+                    <h4>Matched PAM Keywords</h4>
+
+                    {% if result.found %}
+
+                        {% for keyword in result.found %}
+                            <span class="badge bg-success me-1 mb-2">
+                                {{ keyword }}
+                            </span>
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p>No keywords found.</p>
+
+                    {% endif %}
+
+                    <hr>
+
+                    <h4>Missing Keywords</h4>
+
+                    {% for keyword in result.missing %}
+                        <span class="badge bg-danger me-1 mb-2">
+                            {{ keyword }}
+                        </span>
+                    {% endfor %}
+
+                    <hr>
+
+                    <h4>Suggestions</h4>
+
+                    <ul>
+
+                        {% if result.score < 40 %}
+                            <li>Add CyberArk experience.</li>
+                            <li>Add Active Directory.</li>
+                            <li>Add Linux administration.</li>
+                            <li>Add Windows Server.</li>
+                            <li>Add ServiceNow.</li>
+
+                        {% elif result.score < 70 %}
+                            <li>Add PowerShell scripting.</li>
+                            <li>Add MFA implementation.</li>
+                            <li>Add SSH knowledge.</li>
+                            <li>Add Password Vault experience.</li>
+
+                        {% else %}
+                            <li>Your resume is well optimized.</li>
+                            <li>Customize it according to the job description.</li>
+
+                        {% endif %}
+
+                    </ul>
+
+                    <a href="{{ url_for('resume.my_resumes') }}"
+                       class="btn btn-primary">
+                        Back to My Resumes
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

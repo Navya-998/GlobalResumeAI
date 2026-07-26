@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Preview{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow">
+
+        <div class="card-body p-5">
+
+            <div class="text-center mb-4">
+
+                <h1>{{ resume.full_name }}</h1>
+
+                <p>
+                    {{ resume.email }} |
+                    {{ resume.phone }}
+                </p>
+
+                <p>
+                    {{ resume.address }}
+                </p>
+
+                <p>
+                    <strong>LinkedIn:</strong> {{ resume.linkedin }}<br>
+                    <strong>GitHub:</strong> {{ resume.github }}
+                </p>
+
+            </div>
+
+            <hr>
+
+            <h4>Professional Summary</h4>
+
+            <p>{{ resume.summary }}</p>
+
+            <hr>
+
+            <h4>Education</h4>
+
+            <pre style="white-space: pre-wrap;">{{ resume.education }}</pre>
+
+            <hr>
+
+            <h4>Experience</h4>
+
+            <pre style="white-space: pre-wrap;">{{ resume.experience }}</pre>
+
+            <hr>
+
+            <h4>Skills</h4>
+
+            <pre style="white-space: pre-wrap;">{{ resume.skills }}</pre>
+
+            <hr>
+
+            <h4>Projects</h4>
+
+            <pre style="white-space: pre-wrap;">{{ resume.projects }}</pre>
+
+            <hr>
+
+            <h4>Certifications</h4>
+
+            <pre style="white-space: pre-wrap;">{{ resume.certifications }}</pre>
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+
+                <a href="{{ url_for('resume.my_resumes') }}"
+                   class="btn btn-secondary">
+                    Back
+                </a>
+
+                <a href="{{ url_for('resume.download_resume', id=resume.id) }}"
+                   class="btn btn-success">
+                    Download PDF
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,670 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Builder{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3 class="mb-0">
+                Resume Builder
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="row">
+
+                    <!-- Personal Details -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="full_name"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="phone">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Address
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="address">
+
+                    </div>
+
+
+                    <div class="col-12 mb-3">
+
+    
+
+</div>
+
+<div
+    class="col-md-6 mb-3"
+    id="githubSection"
+    style="display:none;">
+
+    <label class="form-label">
+
+        GitHub
+
+    </label>
+
+    <input
+        type="text"
+        class="form-control"
+        name="github">
+
+    <button
+        type="button"
+        class="btn btn-danger btn-sm mt-2"
+        onclick="removeGithub()">
+
+        Remove
+
+    </button>
+
+</div>
+
+                    <!-- AI Summary -->
+
+                    <div class="col-12 mb-3">
+
+                        <label class="form-label">
+
+                            Professional Summary
+
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="5"
+                            name="summary"
+                            id="summary"></textarea>
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-primary mt-3"
+                            onclick="generateSummary()">
+
+                            ✨ Generate AI Summary
+
+                        </button>
+
+                    </div>
+
+                    <!-- Education -->
+
+                    <div class="col-12 mb-3">
+
+                        <label class="form-label">
+
+                            Education
+
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            name="education"></textarea>
+
+                    </div>
+
+                   <!-- Experience -->
+
+<div class="col-12 mb-3">
+
+    <label class="form-label fw-bold">
+        Experience
+    </label>
+
+    <div id="experience-container">
+
+        <div class="experience-item border rounded p-3 mb-3">
+
+            <label class="form-label">Company Name</label>
+            <input type="text"
+                   class="form-control mb-3"
+                   name="company[]">
+
+            <label class="form-label">Job Title</label>
+            <input type="text"
+                   class="form-control mb-3"
+                   name="job_title[]">
+
+            <label class="form-label">Duration</label>
+            <input type="text"
+                   class="form-control mb-3"
+                   name="duration[]">
+
+            <label class="form-label">Job Description</label>
+
+            <textarea
+                class="form-control"
+                rows="4"
+                name="job_description[]"></textarea>
+
+        </div>
+
+    </div>
+
+    <button
+        type="button"
+        class="btn btn-outline-primary"
+        onclick="addExperience()">
+
+        + Add Another Experience
+
+    </button>
+
+</div>
+
+<!-- Skills -->
+
+<div class="col-12 mb-3">
+
+    <label class="form-label">
+        Skills
+    </label>
+
+    <textarea
+        class="form-control"
+        rows="3"
+        name="skills"></textarea>
+
+</div>
+
+<!-- Optional Sections -->
+
+<div class="col-12 mt-4">
+
+    <h4>Optional Sections</h4>
+
+</div>
+
+<!-- LinkedIn -->
+
+<div class="col-12 mb-2">
+
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        onclick="toggleSection('linkedinSection')">
+
+        + Add LinkedIn
+
+    </button>
+
+</div>
+
+<div
+    class="col-md-6 mb-3"
+    id="linkedinSection"
+    style="display:none;">
+
+    <label>LinkedIn</label>
+
+    <input
+        type="text"
+        class="form-control"
+        name="linkedin">
+
+    <button
+        type="button"
+        class="btn btn-danger btn-sm mt-2"
+        onclick="removeSection('linkedinSection','linkedin')">
+
+        Remove
+
+    </button>
+
+</div>
+
+<!-- GitHub -->
+
+<div class="col-12 mb-2">
+
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        onclick="toggleSection('githubSection')">
+
+        + Add GitHub
+
+    </button>
+
+</div>
+
+<div
+    class="col-md-6 mb-3"
+    id="githubSection"
+    style="display:none;">
+
+    <label>GitHub</label>
+
+    <input
+        type="text"
+        class="form-control"
+        name="github">
+
+    <button
+        type="button"
+        class="btn btn-danger btn-sm mt-2"
+        onclick="removeSection('githubSection','github')">
+
+        Remove
+
+    </button>
+
+</div>
+
+<!-- Projects -->
+
+<div class="col-12 mb-2">
+
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        onclick="toggleSection('projectSection')">
+
+        + Add Projects
+
+    </button>
+
+</div>
+
+<div
+    class="col-12 mb-3"
+    id="projectSection"
+    style="display:none;">
+
+    <label>Projects</label>
+
+    <textarea
+        class="form-control"
+        rows="4"
+        name="projects"></textarea>
+
+    <button
+        type="button"
+        class="btn btn-danger btn-sm mt-2"
+        onclick="removeSection('projectSection','projects')">
+
+        Remove
+
+    </button>
+
+</div>
+
+<!-- Certifications -->
+
+<div class="col-12 mb-2">
+
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        onclick="toggleSection('certificationSection')">
+
+        + Add Certifications
+
+    </button>
+
+</div>
+
+<div
+    class="col-12 mb-3"
+    id="certificationSection"
+    style="display:none;">
+
+    <label>Certifications</label>
+
+    <textarea
+        class="form-control"
+        rows="3"
+        name="certifications"></textarea>
+
+    <button
+        type="button"
+        class="btn btn-danger btn-sm mt-2"
+        onclick="removeSection('certificationSection','certifications')">
+
+        Remove
+
+    </button>
+
+</div>
+<!-- Custom Section -->
+
+<div class="col-12 mt-4">
+
+    <h4>Custom Section</h4>
+
+</div>
+
+<div class="col-12 mb-3">
+
+    <button
+        type="button"
+        class="btn btn-outline-dark"
+        onclick="addCustomSection()">
+
+        + Add Custom Section
+
+    </button>
+
+</div>
+
+<div id="custom-section-container"></div>
+
+<!-- Country -->
+
+<div class="col-md-6 mb-4">
+
+    <label>Country</label>
+
+    <select
+        class="form-select"
+        name="country">
+
+        <option>India</option>
+        <option>USA</option>
+        <option>UK</option>
+        <option>Canada</option>
+        <option>Australia</option>
+
+    </select>
+
+</div>
+<!-- Resume Templates -->
+
+<div class="col-12 mb-4">
+
+    <label class="fw-bold mb-3 d-block">
+        Choose Resume Template
+    </label>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <label class="card template-card h-100 text-center p-3">
+
+                <input
+                    type="radio"
+                    name="template"
+                    value="classic"
+                    checked
+                    hidden>
+
+                <h4>📄 Classic</h4>
+
+                <small class="text-muted">
+                    ATS Friendly
+                </small>
+
+            </label>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <label class="card template-card h-100 text-center p-3">
+
+                <input
+                    type="radio"
+                    name="template"
+                    value="modern"
+                    hidden>
+
+                <h4>🎨 Modern</h4>
+
+                <small class="text-muted">
+                    Professional
+                </small>
+
+            </label>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <label class="card template-card h-100 text-center p-3">
+
+                <input
+                    type="radio"
+                    name="template"
+                    value="executive"
+                    hidden>
+
+                <h4>💼 Executive</h4>
+
+                <small class="text-muted">
+                    Leadership
+                </small>
+
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<button
+    type="submit"
+    class="btn btn-success btn-lg w-100">
+
+    💾 Save Resume
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function addExperience(){
+
+    const container =
+        document.getElementById("experience-container");
+
+    const item =
+        container.firstElementChild.cloneNode(true);
+
+    item.querySelectorAll("input").forEach(i=>i.value="");
+
+    item.querySelectorAll("textarea").forEach(t=>t.value="");
+
+    container.appendChild(item);
+
+}
+
+function toggleSection(sectionId){
+
+    document.getElementById(sectionId).style.display="block";
+
+}
+
+function removeSection(sectionId,inputName){
+
+    document.getElementById(sectionId).style.display="none";
+
+    const field=document.querySelector('[name="'+inputName+'"]');
+
+    if(field){
+
+        field.value="";
+
+    }
+
+}
+
+function addCustomSection(){
+
+    const container =
+        document.getElementById("custom-section-container");
+
+    const section =
+        document.createElement("div");
+
+    section.className =
+        "border rounded p-3 mb-3";
+
+    section.innerHTML = `
+
+        <label class="form-label">
+            Section Title
+        </label>
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            name="custom_title[]"
+            placeholder="Example: Awards">
+
+        <label class="form-label">
+            Section Content
+        </label>
+
+        <textarea
+            class="form-control mb-3"
+            rows="4"
+            name="custom_content[]"
+            placeholder="Write anything..."></textarea>
+
+        <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            onclick="this.parentElement.remove()">
+
+            Remove Section
+
+        </button>
+
+    `;
+
+    container.appendChild(section);
+
+}
+
+async function generateSummary(){
+
+    const name =
+        document.querySelector('[name="full_name"]').value;
+
+    const companies =
+        document.querySelectorAll('[name="company[]"]');
+
+    const titles =
+        document.querySelectorAll('[name="job_title[]"]');
+
+    const durations =
+        document.querySelectorAll('[name="duration[]"]');
+
+    const descriptions =
+        document.querySelectorAll('[name="job_description[]"]');
+
+    let experience = "";
+
+    for(let i=0;i<companies.length;i++){
+
+        experience +=
+            "Company: " + companies[i].value + "\n" +
+            "Job Title: " + titles[i].value + "\n" +
+            "Duration: " + durations[i].value + "\n" +
+            "Description: " + descriptions[i].value + "\n\n";
+
+    }
+
+    try{
+
+        const response = await fetch("/generate-summary",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                name:name,
+                role:"",
+                experience:experience
+
+            })
+
+        });
+
+        const data = await response.json();
+
+        document.getElementById("summary").value =
+            data.summary;
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert("AI Summary generation failed.");
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

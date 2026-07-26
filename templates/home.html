@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% block title %}GlobalResumeAI{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6">
+
+<h1>
+
+Create Professional ATS-Friendly Resumes with AI
+
+</h1>
+
+<p class="mt-4 mb-4">
+
+Build modern resumes in minutes.
+Get ATS analysis, AI Summary, AI Cover Letter,
+Job Match, PDF & DOCX downloads — all in one place.
+
+</p>
+
+{% if current_user.is_authenticated %}
+
+<a href="{{ url_for('resume.resume_builder') }}"
+class="btn btn-primary btn-lg me-3">
+
+Create Resume
+
+</a>
+
+<a href="{{ url_for('resume.my_resumes') }}"
+class="btn btn-outline-dark btn-lg">
+
+My Resumes
+
+</a>
+
+{% else %}
+
+<a href="{{ url_for('auth.register') }}"
+class="btn btn-primary btn-lg me-3">
+
+Get Started Free
+
+</a>
+
+<a href="{{ url_for('auth.login') }}"
+class="btn btn-outline-dark btn-lg">
+
+Login
+
+</a>
+
+{% endif %}
+
+</div>
+
+<div class="col-lg-6 text-center">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700"
+class="img-fluid rounded shadow">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Features -->
+
+<div class="container mt-5 mb-5">
+
+<div class="row">
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow h-100">
+
+<div class="card-body text-center">
+
+<h2>🤖</h2>
+
+<h4>AI Resume Builder</h4>
+
+<p>
+
+Generate ATS-friendly summaries,
+cover letters and improve your resume instantly.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow h-100">
+
+<div class="card-body text-center">
+
+<h2>📊</h2>
+
+<h4>ATS Analysis</h4>
+
+<p>
+
+Know your ATS score,
+missing keywords,
+and improvement suggestions.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow h-100">
+
+<div class="card-body text-center">
+
+<h2>📄</h2>
+
+<h4>Export Anywhere</h4>
+
+<p>
+
+Download professional resumes
+in PDF and DOCX formats instantly.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Statistics -->
+
+<div class="container mb-5">
+
+<div class="row text-center">
+
+<div class="col-md-3">
+
+<h2 class="text-primary">10+</h2>
+
+<p>Resume Templates</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2 class="text-success">ATS</h2>
+
+<p>Friendly Design</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2 class="text-danger">AI</h2>
+
+<p>Powered Content</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2 class="text-warning">PDF/DOCX</h2>
+
+<p>Instant Download</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CTA -->
+
+<div class="container mb-5">
+
+<div class="card bg-primary text-white shadow">
+
+<div class="card-body text-center p-5">
+
+<h2>
+
+Ready to Build Your Dream Resume?
+
+</h2>
+
+<p class="mt-3">
+
+Create a professional resume in minutes using GlobalResumeAI.
+
+</p>
+
+{% if current_user.is_authenticated %}
+
+<a href="{{ url_for('resume.resume_builder') }}"
+class="btn btn-light btn-lg">
+
+Create Resume Now
+
+</a>
+
+{% else %}
+
+<a href="{{ url_for('auth.register') }}"
+class="btn btn-light btn-lg">
+
+Join Free Today
+
+</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

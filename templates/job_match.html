@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Job Match{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+<h2>🎯 AI Job Match Analyzer</h2>
+
+</div>
+
+<div class="card-body">
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Paste Job Description
+
+</label>
+
+<textarea
+class="form-control"
+name="job_description"
+rows="12"
+placeholder="Paste complete Job Description here...">{{ job_description }}</textarea>
+
+</div>
+
+<button class="btn btn-primary">
+
+Analyze Resume
+
+</button>
+
+</form>
+
+{% if score is not none %}
+
+<hr>
+
+<div class="text-center">
+
+<h1 class="display-2 text-success">
+
+{{ score }}%
+
+</h1>
+
+<h4>Overall Resume Match</h4>
+
+</div>
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<h4 class="text-success">
+
+✅ Matching Skills
+
+</h4>
+
+{% if found %}
+
+<ul class="list-group">
+
+{% for skill in found %}
+
+<li class="list-group-item">
+
+{{ skill }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>No matching skills found.</p>
+
+{% endif %}
+
+</div>
+
+<div class="col-md-6">
+
+<h4 class="text-danger">
+
+❌ Missing Skills
+
+</h4>
+
+{% if missing %}
+
+<ul class="list-group">
+
+{% for skill in missing %}
+
+<li class="list-group-item">
+
+{{ skill }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>No missing skills.</p>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<hr>
+
+<h3 class="text-primary">
+
+✨ Resume Optimization Suggestions
+
+</h3>
+
+{% if tips %}
+
+<div class="alert alert-info">
+
+<ul class="mb-0">
+
+{% for tip in tips %}
+
+<li>
+
+{{ tip }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endif %}
+
+{% if estimated_score %}
+
+<div class="text-center mt-4">
+
+<h4>
+
+Estimated ATS Score After Improvements
+
+</h4>
+
+<h1 class="display-5 text-success">
+
+{{ estimated_score }}%
+
+</h1>
+
+</div>
+
+{% endif %}
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

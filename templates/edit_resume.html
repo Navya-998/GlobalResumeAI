@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Resume{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning text-dark">
+
+            <h3 class="mb-0">
+                ✏ Edit Resume
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="full_name"
+                            value="{{ resume.full_name }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Email</label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            value="{{ resume.email }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Phone</label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="phone"
+                            value="{{ resume.phone }}">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Address</label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="address"
+                            value="{{ resume.address }}">
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <label>Professional Summary</label>
+
+<textarea
+    class="form-control"
+    rows="5"
+    id="summary"
+    name="summary">{{ resume.summary }}</textarea>
+
+<div class="mt-3">
+
+    <button
+        type="button"
+        class="btn btn-primary"
+        onclick="generateSummary()">
+
+        ✨ Generate AI Summary
+
+    </button>
+
+</div>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <label>Education</label>
+
+                        <textarea
+                            class="form-control"
+                            rows="5"
+                            name="education">{{ resume.education }}</textarea>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <label>Skills</label>
+
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            name="skills">{{ resume.skills }}</textarea>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <label>Projects</label>
+
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            name="projects">{{ resume.projects }}</textarea>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <label>Certifications</label>
+
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            name="certifications">{{ resume.certifications }}</textarea>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>LinkedIn</label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="linkedin"
+                            value="{{ resume.linkedin }}">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>GitHub</label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="github"
+                            value="{{ resume.github }}">
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label>Country</label>
+
+                        <select
+                            class="form-select"
+                            name="country">
+
+                            <option value="India" {% if resume.country=="India" %}selected{% endif %}>India</option>
+                            <option value="USA" {% if resume.country=="USA" %}selected{% endif %}>USA</option>
+                            <option value="UK" {% if resume.country=="UK" %}selected{% endif %}>UK</option>
+                            <option value="Canada" {% if resume.country=="Canada" %}selected{% endif %}>Canada</option>
+                            <option value="Australia" {% if resume.country=="Australia" %}selected{% endif %}>Australia</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label>Template</label>
+
+                        <select
+                            class="form-select"
+                            name="template">
+
+                            <option value="classic" {% if resume.template=="classic" %}selected{% endif %}>Classic</option>
+                            <option value="modern" {% if resume.template=="modern" %}selected{% endif %}>Modern</option>
+                            <option value="executive" {% if resume.template=="executive" %}selected{% endif %}>Executive</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-warning w-100">
+
+                    💾 Update Resume
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function generateSummary(){
+
+    const name =
+        document.querySelector('[name="full_name"]').value;
+
+    const skills =
+        document.querySelector('[name="skills"]').value;
+
+    const education =
+        document.querySelector('[name="education"]').value;
+
+    const response = await fetch("/generate-summary",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            name:name,
+
+            role:skills,
+
+            experience:education
+
+        })
+
+    });
+
+    const data = await response.json();
+
+    document.getElementById("summary").value =
+        data.summary;
+
+}
+
+</script>
+
+{% endblock %}

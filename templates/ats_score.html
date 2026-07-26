@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}ATS Resume Analysis{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-success text-white">
+
+            <h2 class="mb-0">
+                📊 ATS Resume Analysis
+            </h2>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="text-center mb-5">
+
+                {% if score >= 80 %}
+
+                    <div class="display-2 text-success fw-bold">
+                        {{ score }}%
+                    </div>
+
+                    <h4 class="text-success">
+                        ⭐⭐⭐⭐⭐ Excellent Resume
+                    </h4>
+
+                {% elif score >= 60 %}
+
+                    <div class="display-2 text-primary fw-bold">
+                        {{ score }}%
+                    </div>
+
+                    <h4 class="text-primary">
+                        ⭐⭐⭐⭐ Good Resume
+                    </h4>
+
+                {% elif score >= 40 %}
+
+                    <div class="display-2 text-warning fw-bold">
+                        {{ score }}%
+                    </div>
+
+                    <h4 class="text-warning">
+                        ⭐⭐⭐ Average Resume
+                    </h4>
+
+                {% else %}
+
+                    <div class="display-2 text-danger fw-bold">
+                        {{ score }}%
+                    </div>
+
+                    <h4 class="text-danger">
+                        ⭐ Needs Improvement
+                    </h4>
+
+                {% endif %}
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6 mb-4">
+
+                    <div class="card border-success h-100">
+
+                        <div class="card-header bg-success text-white">
+
+                            ✅ Keywords Found ({{ found|length }})
+
+                        </div>
+
+                        <div class="card-body">
+
+                            {% if found %}
+
+                                <ul class="list-group">
+
+                                {% for keyword in found %}
+
+                                    <li class="list-group-item">
+
+                                        {{ keyword }}
+
+                                    </li>
+
+                                {% endfor %}
+
+                                </ul>
+
+                            {% else %}
+
+                                <p class="text-muted">
+                                    No keywords found.
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 mb-4">
+
+                    <div class="card border-danger h-100">
+
+                        <div class="card-header bg-danger text-white">
+
+                            ❌ Missing Keywords ({{ missing|length }})
+
+                        </div>
+
+                        <div class="card-body">
+
+                            {% if missing %}
+
+                                <ul class="list-group">
+
+                                {% for keyword in missing %}
+
+                                    <li class="list-group-item">
+
+                                        {{ keyword }}
+
+                                    </li>
+
+                                {% endfor %}
+
+                                </ul>
+
+                            {% else %}
+
+                                <p class="text-success">
+
+                                    Excellent! No missing keywords.
+
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card border-primary mt-3">
+
+                <div class="card-header bg-primary text-white">
+
+                    💡 Resume Improvement Suggestions
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if suggestions %}
+
+                        <ul class="list-group">
+
+                        {% for item in suggestions %}
+
+                            <li class="list-group-item">
+
+                                {{ item }}
+
+                            </li>
+
+                        {% endfor %}
+
+                        </ul>
+
+                    {% else %}
+
+                        <div class="alert alert-success mb-0">
+
+                            🎉 Excellent! Your resume is ATS friendly.
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <div class="text-center mt-4">
+
+                <a href="{{ url_for('resume.my_resumes') }}"
+                   class="btn btn-primary">
+
+                    ← Back to My Resumes
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
