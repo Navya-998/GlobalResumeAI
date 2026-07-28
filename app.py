@@ -12,6 +12,7 @@ from models.user import User
 from models.resume import Resume
 from routes.blog import blog
 from routes.admin import admin
+from routes.seo import seo
 
 print("Database Path:", os.path.abspath("resume.db"))
 
@@ -30,6 +31,7 @@ app.register_blueprint(resume)
 app.register_blueprint(auth)
 app.register_blueprint(blog)
 app.register_blueprint(admin)
+app.register_blueprint(seo)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -39,6 +41,7 @@ def load_user(user_id):
 with app.app_context():
     db.create_all()
 
+print(app.url_map)
 
 if __name__ == "__main__":
     app.run(debug=True)
